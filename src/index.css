@@ -1,9 +1,15 @@
+/* =============================================================================
+   ⭐ CENTRALIZED FONT CONFIGURATION:
+   Edit "src/fonts.css" to change the font of the entire website or headers!
+   ============================================================================= */
+@import "./fonts.css";
+
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-space: 'Space Grotesk', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: var(--site-font-all, var(--site-font-body));
+  --font-space: var(--site-font-all, var(--site-font-heading));
+  --font-mono: var(--site-font-mono);
 
   --color-pine: #111E13;
   --color-forest: #233A1F;

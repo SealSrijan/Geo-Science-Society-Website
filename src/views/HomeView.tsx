@@ -55,10 +55,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
   // Category Filter for Ongoing & Upcoming Activities
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  // Standard FAQ Accordion State
-  const [openFaqId, setOpenFaqId] = useState<string | null>('faq-1');
-  const [faqCategory, setFaqCategory] = useState<string>('All');
-
   // Contact Form State
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
@@ -178,12 +174,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
       setContactPrivacy(false);
     }, 4000);
   };
-
-  // FAQ Category Filter
-  const filteredFaqs =
-    faqCategory === 'All'
-      ? FAQS
-      : FAQS.filter((f) => f.category === faqCategory);
 
   const filteredEvents =
     selectedCategory === 'All'
@@ -651,13 +641,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <StrataDivider label="STRATA HORIZON 04" depth="-580m" />
 
       {/* -------------------------------------------------------------
-          STRATA 05: FREQUENTLY ASKED QUESTIONS (NORMAL Q&A)
-          Clean Accordion on Website's Original Ivory Background (#FAF8F5)
+          STRATA 05: FREQUENTLY ASKED QUESTIONS (Q&A SLIDER)
+          Single Layer of Moving Q&A Cards on Ivory Background (#FAF8F5)
+          Full Swipe Support for Laptop (Trackpad / Mouse Drag) & Mobile
       ------------------------------------------------------------- */}
       <section
         ref={faqRef}
         id="faq-strata"
-        className="relative py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-[#111E13]"
+        className="relative py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-[#111E13]"
       >
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2B4624]/10 border border-[#2B4624]/20 text-[#2B4624] text-xs font-mono mb-3 font-bold tracking-wider">
@@ -671,74 +662,51 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <p className="text-sm sm:text-base text-[#334437] mt-3 font-sans leading-relaxed">
             Everything you need to know about joining Geo-Science Society, establishing a student chapter, attending field workshops, and contributing to national Earth science initiatives.
           </p>
-
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap justify-center gap-1.5 mt-6">
-            {['All', 'Membership', 'Chapters', 'Events & Workshops', 'Submissions & Research', 'Partnerships'].map(
-              (cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setFaqCategory(cat)}
-                  className={`text-xs font-mono px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${
-                    faqCategory === cat
-                      ? 'bg-[#2B4624] text-white font-bold border-[#2B4624] shadow-xs'
-                      : 'bg-white/80 text-[#2D3E30] border-[#2B4624]/15 hover:bg-white hover:border-[#2B4624]/30'
-                  }`}
-                >
-                  {cat}
-                </button>
-              )
-            )}
-          </div>
         </div>
 
-        {/* Clean Standard FAQ Accordion List */}
-        <div className="space-y-3">
-          {filteredFaqs.map((faq) => {
-            const isOpen = openFaqId === faq.id;
-            return (
-              <div
-                key={faq.id}
-                className={`rounded-2xl transition-all duration-200 border overflow-hidden ${
-                  isOpen
-                    ? 'bg-white border-[#2B4624]/40 shadow-md ring-1 ring-[#2B4624]/10'
-                    : 'bg-white/70 hover:bg-white border-[#2B4624]/15 hover:border-[#2B4624]/30 shadow-xs'
-                }`}
-              >
-                <button
-                  onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
-                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 cursor-pointer"
-                  aria-expanded={isOpen}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-[#2B4624]/10 text-[#2B4624] font-bold uppercase tracking-wider flex-shrink-0">
-                      {faq.category}
-                    </span>
-                    <h3 className="text-base sm:text-lg font-bold font-space text-[#111E13] leading-snug">
-                      {faq.question}
-                    </h3>
-                  </div>
+        {/* SINGLE LAYER OF MOVING FAQ CARDS (Swipe on Laptop & Mobile) */}
+        <CardsSlider
+          items={FAQS}
+          accentColor="#2B4624"
+          theme="light"
+          autoSwipeIntervalMs={6000}
+          itemsPerView={{ mobile: 1, tablet: 2, desktop: 2 }}
+          renderCard={(faq, idx) => (
+            <div
+              key={faq.id}
+              className="bg-white/95 border border-[#2B4624]/15 hover:border-[#2B4624]/40 rounded-2xl p-6 sm:p-7 flex flex-col justify-between group transition-all duration-300 shadow-md hover:shadow-xl text-[#111E13] backdrop-blur-md h-full"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-[#2B4624]/10 text-[#2B4624]">
+                    Q. {String(idx + 1).padStart(2, '0')}
+                  </span>
+                </div>
 
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
-                      isOpen
-                        ? 'bg-[#2B4624] text-white rotate-180'
-                        : 'bg-[#2B4624]/10 text-[#2B4624]'
-                    }`}
-                  >
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
-                </button>
+                <h3 className="text-lg sm:text-xl font-bold font-space text-[#111E13] group-hover:text-[#2B4624] transition-colors leading-snug mb-3">
+                  {faq.question}
+                </h3>
 
-                {isOpen && (
-                  <div className="px-5 pb-6 sm:px-6 sm:pb-6 pt-1 text-sm text-[#334437] leading-relaxed font-sans border-t border-[#2B4624]/10">
-                    <p>{faq.answer}</p>
-                  </div>
-                )}
+                <p className="text-sm text-[#334437] leading-relaxed font-sans">
+                  {faq.answer}
+                </p>
               </div>
-            );
-          })}
-        </div>
+
+              <div className="pt-4 mt-6 border-t border-[#2B4624]/10 flex items-center justify-end text-xs font-mono text-[#526556]">
+                <button
+                  onClick={() => {
+                    if (contactRef.current) {
+                      contactRef.current.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="text-[#1D6FB8] hover:text-[#2B4624] font-bold cursor-pointer transition-colors"
+                >
+                  Ask our team →
+                </button>
+              </div>
+            </div>
+          )}
+        />
 
         {/* Contact Assistance Card */}
         <div className="mt-10 p-5 rounded-2xl bg-white/70 border border-[#2B4624]/15 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">

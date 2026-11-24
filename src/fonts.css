@@ -1,0 +1,119 @@
+/* =============================================================================
+   GEO-SCIENCE SOCIETY (GSS) — GLOBAL TYPOGRAPHY & FONT CONFIGURATION
+   =============================================================================
+   
+   👉 THIS IS THE SINGLE FILE TO CHANGE ALL FONTS ACROSS THE ENTIRE WEBSITE!
+   
+   You can:
+   1. Change the font for the ENTIRE website in ONE line (Option 1 below).
+   2. OR customize Headings, Body, and Monospace separately (Option 2 below).
+   3. Choose from pre-configured curated presets (Option 3 below).
+   4. Add any custom Google Font or local font you want!
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. GOOGLE FONTS PRE-LOADED PACK
+   Includes: Space Grotesk, Inter, JetBrains Mono, Outfit, Poppins,
+             Plus Jakarta Sans, DM Sans, Syne, Geologica, Montserrat
+   ----------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=Geologica:wght@300..800&family=Inter:wght@300..800&family=JetBrains+Mono:wght@400..700&family=Montserrat:ital,wght@0,300..800;1,300..800&family=Outfit:wght@300..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400..700&family=Syne:wght@500..800&display=swap');
+
+:root {
+  /* ===========================================================================
+     ⭐ OPTION 1: CHANGE THE WHOLE WEBSITE'S FONT IN ONE SINGLE LINE!
+     ===========================================================================
+     Uncomment ONE of the lines below to apply that font to EVERYTHING:
+     All headers, titles, navigation bar, buttons, cards, paragraphs, and footer!
+     (Leave commented out if you want different fonts for headers vs body text)
+     =========================================================================== */
+
+  /* --site-font-all: 'Poppins', sans-serif; */
+  /* --site-font-all: 'Outfit', sans-serif; */
+  /* --site-font-all: 'Plus Jakarta Sans', sans-serif; */
+  /* --site-font-all: 'DM Sans', sans-serif; */
+  /* --site-font-all: 'Geologica', sans-serif; */
+  /* --site-font-all: 'Montserrat', sans-serif; */
+  /* --site-font-all: 'Inter', sans-serif; */
+
+
+  /* ===========================================================================
+     ⭐ OPTION 2: INDEPENDENT FONT CONTROLS (DEFAULT MODE)
+     ===========================================================================
+     Customize your Headings font, Body font, and Code font separately:
+     =========================================================================== */
+
+  /* 🔹 HEADINGS FONT: Controls H1-H6, Hero headlines, Strata titles, section headers */
+  --site-font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+
+  /* 🔹 BODY FONT: Controls paragraphs, navbar links, buttons, cards, descriptions, modals */
+  --site-font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 🔹 MONOSPACE / DATA FONT: Controls Clinometer compass, coordinates, dates, badges, tags */
+  --site-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+
+  /* ===========================================================================
+     ⭐ OPTION 3: QUICK CURATED PRESETS (Copy & paste into Option 2 above)
+     ===========================================================================
+     
+     🌿 PRESET 1: "Default Geological" (Current)
+        --site-font-heading: 'Space Grotesk', sans-serif;
+        --site-font-body:    'Inter', sans-serif;
+        --site-font-mono:    'JetBrains Mono', monospace;
+
+     💎 PRESET 2: "Modern Tech & Clean" (Ultra-sleek agency look)
+        --site-font-heading: 'Outfit', sans-serif;
+        --site-font-body:    'Plus Jakarta Sans', sans-serif;
+        --site-font-mono:    'JetBrains Mono', monospace;
+
+     ✨ PRESET 3: "Friendly & Premium"
+        --site-font-heading: 'Poppins', sans-serif;
+        --site-font-body:    'Poppins', sans-serif;
+        --site-font-mono:    'JetBrains Mono', monospace;
+
+     📖 PRESET 4: "Editorial Academic"
+        --site-font-heading: 'DM Sans', sans-serif;
+        --site-font-body:    'DM Sans', sans-serif;
+        --site-font-mono:    'JetBrains Mono', monospace;
+
+     🌋 PRESET 5: "Earth Science Specialist"
+        --site-font-heading: 'Geologica', sans-serif;
+        --site-font-body:    'Inter', sans-serif;
+        --site-font-mono:    'JetBrains Mono', monospace;
+
+     ⚡ PRESET 6: "Bold Avant-Garde"
+        --site-font-heading: 'Syne', sans-serif;
+        --site-font-body:    'Inter', sans-serif;
+        --site-font-mono:    'JetBrains Mono', monospace;
+     =========================================================================== */
+}
+
+/* =============================================================================
+   CASCADE ENGINE: Applies your chosen fonts globally and consistently
+   ============================================================================= */
+
+/* Headings & Title Elements */
+h1, h2, h3, h4, h5, h6,
+.font-space,
+[data-font="heading"] {
+  font-family: var(--site-font-all, var(--site-font-heading)) !important;
+}
+
+/* Ensure child spans/em/strong inside headings inherit the heading font */
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, .font-space * {
+  font-family: inherit;
+}
+
+/* Base Body and Standard UI Text */
+body,
+.font-sans,
+[data-font="body"] {
+  font-family: var(--site-font-all, var(--site-font-body));
+}
+
+/* Monospace, Technical Badges, Clinometer Telemetry */
+code, pre, kbd,
+.font-mono,
+[data-font="mono"] {
+  font-family: var(--site-font-mono) !important;
+}

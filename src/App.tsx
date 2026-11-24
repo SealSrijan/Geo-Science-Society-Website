@@ -6,7 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { FieldBackground } from './components/FieldBackground';
-import { FieldTelemetryHud } from './components/FieldTelemetryHud';
 import { ClinometerCompass } from './components/ClinometerCompass';
 import { JoinModal } from './components/JoinModal';
 import { SearchModal } from './components/SearchModal';
@@ -163,10 +162,7 @@ export function App() {
         onOpenJoin={() => setIsJoinOpen(true)}
       />
 
-      {/* 5. Minimal Monospace Field Telemetry HUD */}
-      <FieldTelemetryHud currentView={currentView} />
-
-      {/* 6. Interactive Geological Brunton Clinometer Compass */}
+      {/* 5. Interactive Geological Clinometer Compass (With Integrated GPS & Strata Telemetry) */}
       <ClinometerCompass onNavigateSection={handleNavigateSection} />
 
       {/* 7. Global Modals & Lightboxes */}
